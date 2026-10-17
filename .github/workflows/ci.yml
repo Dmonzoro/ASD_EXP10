@@ -1,4 +1,5 @@
-﻿name: Customer Segmentation CI
+﻿
+name: Customer Segmentation CI
 
 on:
   push:
@@ -33,3 +34,6 @@ jobs:
       - name: Verify model files
         run: |
           python -c "import os; files=['kmeans_model.pkl','pca_model.pkl','scaler.pkl']; missing=[f for f in files if not os.path.isfile(f)]; print('All model files found' if not missing else 'Missing: '+', '.join(missing)); exit(bool(missing))"
+
+      - name: Build Docker image
+        run: docker build -t customer-segmentation:ci .
