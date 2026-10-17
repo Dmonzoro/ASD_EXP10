@@ -4,6 +4,9 @@ import joblib
 import os
 
 app = Flask(__name__)
+@app.route("/health")
+def health():
+    return jsonify({"status": "healthy"}), 200
 
 # Load models
 model = joblib.load("kmeans_model.pkl")
